@@ -36,7 +36,7 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'get /locations': 'LocationController.hi'
+  'post /locations': 'LocationController.createLocation'
 
 
   /***************************************************************************

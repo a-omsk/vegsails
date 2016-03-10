@@ -6,7 +6,41 @@
  */
 
 module.exports = {
-	hi(req, res) {
-    return res.send("Hi there!");
- 	}
+  createLocation(req, res) {
+    const locationRequest = Object.assign({}, req.body);
+
+    if (locationRequest.markerId) {
+
+      Location.create(locationRequest).exec((err, location) => {
+        res.json(location);
+      });
+
+    } else {
+
+      const {lat, lng, city} = locationRequest;
+
+      Marker.create({lat, lng, city}).exec((err, marker) => {
+        locationRequest.markerId = marker.id;
+
+        Location.create(locationRequest).exec((err, location) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.json(location);
+          }
+        });
+      });
+    }
+  },
+
+  getLocationsByCity(req, res) {
+    Marker.find({city: 'omsk'}).exec((err, markers) => {
+      if (err) {
+        return res.negotiate(err);
+      }
+
+      return res.send(markers);
+
+    });
+  }
 };

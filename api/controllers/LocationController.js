@@ -6,44 +6,42 @@
  */
 
 module.exports = {
-  createLocation(req, res) {
-    const locationRequest = Object.assign({}, req.body);
+    createLocation(req, res) {
+        const locationRequest = Object.assign({}, req.body);
 
-    if (locationRequest.markerId) {
+        if (locationRequest.markerId) {
 
-      Location.create(locationRequest).exec((err, location) => {
-        res.json(location);
-      });
+            Location.createNew(locationRequest)
+                .then(location => res.json(location))
+                .catch(error => res.negotiate(error));
 
-    } else {
+        } else {
 
-      const {lat, lng, city} = locationRequest;
+            const {lat, lng, city} = locationRequest;
 
-      Marker.create({lat, lng, city}).exec((err, marker) => {
-        locationRequest.markerId = marker.id;
+            Marker.createNew(lat, lng, city)
+                .then(marker => {
+                    locationRequest.markerId = marker.id;
 
-        Location.create(locationRequest).exec((err, location) => {
-          if (err) {
-            res.send(err);
-          } else {
-            res.json(location);
-          }
-        });
-      });
+                    Location.createNew(locationRequest)
+                        .then(location => res.json(location))
+                        .catch(error => res.negotiate(error));
+                })
+                .catch(error => res.negotiate(error));
+        }
+    },
+
+    getLocationsByCity(req, res) {
+        Marker.getMarkersByCity(req.params.city, 'locations')
+            .then(markers => {
+
+                const locations = _.chain(markers)
+                    .map(({ locations }) => locations)
+                    .flatten()
+                    .value();
+
+                return res.send(locations);
+            })
+            .catch(error => res.negotiate(error));
     }
-  },
-
-  getLocationsByCity(req, res) {
-    Marker.getMarkersByCity(req.params.city, 'locations')
-      .then(markers => {
-
-        const locations = _.chain(markers)
-          .map(({ locations }) => locations)
-          .flatten()
-          .value();
-
-        return res.send(locations);
-      })
-      .catch(error => res.negotiate(error));
-  }
 };

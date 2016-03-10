@@ -7,40 +7,54 @@
 
 module.exports = {
 
-  attributes: {
-    lat: {
-      type: 'float',
-      required: true
-    },
+    attributes: {
+        lat: {
+            type: 'float',
+            required: true
+        },
 
-    lng: {
-      type: 'float',
-      required: true
-    },
+        lng: {
+            type: 'float',
+            required: true
+        },
 
-    city: {
-      type: 'string',
-      required: true
-    },
+        city: {
+            type: 'string',
+            required: true
+        },
 
-    locations: {
-      collection: 'location',
-      via: 'markerId'
-    }
-  },
-
-  getMarkersByCity (city, populate) {
-    return new Promise((resolve, reject) => {
-      const markers = populate ? Marker.find({city}).populate(populate) :  Marker.find({city});
-
-      markers.exec((err, markers) => {
-        if (err) {
-          return reject(err);
+        locations: {
+            collection: 'location',
+            via: 'markerId'
         }
+    },
 
-        return resolve(markers);
-      });
-    });
-  }
+    getMarkersByCity (city, populate) {
+        return new Promise((resolve, reject) => {
+            const markers = populate ? Marker.find({city}).populate(populate) : Marker.find({city});
+
+            markers.exec((err, markers) => {
+                if (err) {
+                    return reject(err);
+                }
+
+                return resolve(markers);
+            });
+        });
+    },
+
+    createNew(lat, lng, city) {
+        return new Promise((resolve, reject) => {
+            if (lat && lng && city) {
+                Marker.create({lat, lng, city}).exec((err, marker) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(marker);
+                    }
+                });
+            }
+        })
+    }
 };
 

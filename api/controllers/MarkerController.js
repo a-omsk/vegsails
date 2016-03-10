@@ -6,10 +6,10 @@
  */
 
 module.exports = {
-  getMarkersByCity(req, res) {
-    Marker.getMarkersByCity(req.params.city)
-      .then(markers => res.send(markers))
-      .catch(error => res.negotiate(error));
-  }
+    getMarkersByCity(req, res) {
+        Marker.getMarkersByCity(req.params.city)
+            .then(markers => res.send(markers))
+            .catch(error => res.negotiate(error));
+    }
 };
 

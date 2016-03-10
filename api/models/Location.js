@@ -6,38 +6,50 @@
  */
 
 module.exports = {
-  attributes: {
-    name: {
-      type: 'string'
+    attributes: {
+        name: {
+            type: 'string'
+        },
+
+        description: {
+            type: 'string',
+            required: true
+        },
+
+        rating: {
+            type: 'float',
+            required: true
+        },
+
+        address: {
+            type: 'string',
+            required: true
+        },
+
+        specification: {
+            type: 'string',
+            required: true
+        },
+
+        type: {
+            type: 'string',
+            required: true
+        },
+
+        markerId: {
+            model: 'marker'
+        }
     },
 
-    description: {
-      type: 'string',
-      required: true
-    },
-
-    rating: {
-      type: 'float',
-      required: true
-    },
-
-    address: {
-      type: 'string',
-      required: true
-    },
-
-    specification: {
-      type: 'string',
-      required: true
-    },
-
-    type: {
-      type: 'string',
-      required: true
-    },
-
-    markerId: {
-      model: 'marker'
+    createNew(location) {
+        return new Promise((resolve, reject) => {
+            Location.create(location).exec((err, location) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(location);
+                }
+            });
+        });
     }
-  }
 };

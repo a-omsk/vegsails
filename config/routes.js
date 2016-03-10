@@ -37,7 +37,8 @@ module.exports.routes = {
   },
 
   'post /locations': 'LocationController.createLocation',
-  'get /locations/:city': 'LocationController.getLocationsByCity'
+  'get /locations/:city': 'LocationController.getLocationsByCity',
+  'get /markers/:city': 'MarkerController.getMarkersByCity'
 
 
   /***************************************************************************

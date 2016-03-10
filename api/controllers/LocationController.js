@@ -34,18 +34,16 @@ module.exports = {
   },
 
   getLocationsByCity(req, res) {
-    Marker.find({city: req.params.city}).populate('locations').exec((err, markers) => {
-      if (err) {
-        return res.negotiate(err);
-      }
+    Marker.getMarkersByCity(req.params.city, 'locations')
+      .then(markers => {
 
-      const locations = _.chain(markers)
-        .map(({ locations }) => locations)
-        .flatten()
-        .value();
+        const locations = _.chain(markers)
+          .map(({ locations }) => locations)
+          .flatten()
+          .value();
 
-      return res.send(locations);
-
-    });
+        return res.send(locations);
+      })
+      .catch(error => res.negotiate(error));
   }
 };

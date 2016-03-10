@@ -6,7 +6,6 @@
  */
 
 module.exports = {
-
   attributes: {
     name: {
       type: 'string'
@@ -18,8 +17,8 @@ module.exports = {
     },
 
     rating: {
-        type: 'float',
-        required: true
+      type: 'float',
+      required: true
     },
 
     address: {

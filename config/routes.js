@@ -36,7 +36,8 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'post /locations': 'LocationController.createLocation'
+  'post /locations': 'LocationController.createLocation',
+  'get /locations/:city': 'LocationController.getLocationsByCity'
 
 
   /***************************************************************************

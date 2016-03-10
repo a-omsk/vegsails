@@ -19,11 +19,9 @@
     "grunt-sails-linker": "~0.10.1",
     "grunt-sync": "0.2.4",
     "include-all": "~0.1.6",
-    "node-inspector": "^0.12.7",
     "rc": "1.0.1",
     "sails": "~0.12.1",
-    "sails-disk": "~0.10.9",
-    "sails-hook-babel": "^6.0.1"
+    "sails-disk": "~0.10.9"
   },
   "scripts": {
     "debug": "node debug app.js",
@@ -35,5 +33,10 @@
     "url": "git://github.com/diskrouk/vegsails.git"
   },
   "author": "diskrouk",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "sails-hook-babel": "^6.0.1",
+    "sails-hook-autoreload": "^0.13.1",
+    "node-inspector": "^0.12.7"
+  }
 }

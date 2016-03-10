@@ -10,6 +10,12 @@ module.exports = {
         Marker.getMarkersByCity(req.params.city)
             .then(markers => res.send(markers))
             .catch(error => res.negotiate(error));
+    },
+
+    getFullMarker(req, res) {
+        Marker.getFullMarker(req.params.id)
+            .then(marker => res.send(marker))
+            .catch(error => res.negotiate(error));
     }
 };
 

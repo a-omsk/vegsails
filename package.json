@@ -27,7 +27,8 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "lift": "sails lift"
   },
   "main": "app.js",
   "repository": {
@@ -37,8 +38,9 @@
   "author": "diskrouk",
   "license": "",
   "devDependencies": {
-    "sails-hook-babel": "^6.0.1",
+    "node-inspector": "^0.12.7",
+    "sails": "^0.12.1",
     "sails-hook-autoreload": "^0.13.1",
-    "node-inspector": "^0.12.7"
+    "sails-hook-babel": "^6.0.1"
   }
 }

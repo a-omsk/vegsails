@@ -38,6 +38,10 @@ module.exports = {
 
         markerId: {
             model: 'marker'
+        },
+
+        userId: {
+            model: 'user'
         }
     },
 

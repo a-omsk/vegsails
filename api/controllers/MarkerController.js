@@ -7,10 +7,9 @@
 
 module.exports = {
     getMarkersByCity(req, res) {
-        const { lat, lng } = req.query;
         const { city } = req.params;
 
-        Marker.getMarkersByCity(city, null, { lat, lng })
+        Marker.getMarkersByCity(city)
             .then(markers => res.send(markers))
             .catch(error => res.negotiate(error));
     },

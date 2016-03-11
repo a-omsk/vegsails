@@ -31,15 +31,12 @@ module.exports = {
     },
 
     getLocationsByCity(req, res) {
-        Marker.getMarkersByCity(req.params.city, 'locations')
+        const { lat, lng } = req.query;
+        const { city } = req.params;
+
+        Marker.getMarkersByCity(city, 'locations', { lat, lng })
             .then(markers => {
-
-                const locations = _.chain(markers)
-                    .map(({ locations }) => locations)
-                    .flatten()
-                    .value();
-
-                return res.json(locations);
+                return res.json(MarkerService.toLocations(markers))
             })
             .catch(error => res.negotiate(error));
     }

@@ -38,7 +38,7 @@ module.exports = {
                     return reject(err);
                 }
 
-                if (distance) {
+                if (distance && distance.lat && distance.lng) {
                     const latitude = parseFloat(distance.lat);
                     const longitude = parseFloat(distance.lng);
                     markers = DistanceCalculator(markers, {latitude, longitude});

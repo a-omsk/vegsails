@@ -36,12 +36,6 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-    'POST /locations': 'LocationController.createLocation',
-    'GET /locations/:city/': 'LocationController.getLocationsByCity',
-    'GET /locations/:city/:id': 'MarkerController.getFullMarker',
-    'GET /markers/:city': 'MarkerController.getMarkersByCity'
-
-
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
@@ -52,4 +46,15 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
+    /* Locations and Markers */
+
+    'POST /locations': 'LocationController.createLocation',
+    'GET /locations/:city': 'LocationController.getLocationsByCity',
+    'GET /locations/:city/:id': 'MarkerController.getFullMarker',
+    'GET /markers/:city': 'MarkerController.getMarkersByCity',
+
+    /* Comments */
+
+    'GET /locations/:city/:id/comments': 'CommentController.getComments',
+    'POST /locations/:city/:id/comments': 'CommentController.createComment'
 };

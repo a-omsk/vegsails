@@ -6,6 +6,12 @@
  */
 
 module.exports = {
-	
+    createComment(req, res) {
+        return res.send('comment saved');
+    },
+
+    getComments(req, res) {
+        return res.send('comments here');
+    }
 };
 

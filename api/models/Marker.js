@@ -29,13 +29,19 @@ module.exports = {
         }
     },
 
-    getMarkersByCity (city, populate) {
+    getMarkersByCity (city, populate, distance) {
         return new Promise((resolve, reject) => {
             const markers = populate ? this.find({ city }).populate(populate) : this.find({city});
 
             markers.exec((err, markers) => {
                 if (err) {
                     return reject(err);
+                }
+
+                if (distance) {
+                    const latitude = parseFloat(distance.lat);
+                    const longitude = parseFloat(distance.lng);
+                    markers = DistanceCalculator(markers, {latitude, longitude});
                 }
 
                 return resolve(markers);
@@ -75,4 +81,6 @@ module.exports = {
         })
     }
 };
+
+
 

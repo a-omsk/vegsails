@@ -7,6 +7,27 @@
 
 module.exports = {
 
-    attributes: {}
+    attributes: {
+
+        userId: {
+            model: 'user',
+            required: true
+        },
+
+        locationId: {
+            model: 'location',
+            required: true
+        },
+
+        rating: {
+            type: 'float',
+            required: true
+        },
+
+        body: {
+            type: 'string',
+            required: true
+        }
+    }
 };
 

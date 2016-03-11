@@ -11,13 +11,11 @@ module.exports = {
         const locationRequest = Object.assign({ userId }, req.body);
 
         if (locationRequest.markerId) {
-
             Location.createNew(locationRequest)
                 .then(location => res.json(location))
                 .catch(error => res.negotiate(error));
 
         } else {
-
             const {lat, lng, city} = locationRequest;
 
             Marker.createNew(lat, lng, city)
@@ -41,7 +39,7 @@ module.exports = {
                     .flatten()
                     .value();
 
-                return res.send(locations);
+                return res.json(locations);
             })
             .catch(error => res.negotiate(error));
     }

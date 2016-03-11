@@ -45,6 +45,11 @@ module.exports = {
         userId: {
             model: 'user',
             required: true
+        },
+
+        comments: {
+            collection: 'comment',
+            via: 'locationId'
         }
     },
 

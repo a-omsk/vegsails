@@ -7,7 +7,15 @@
 
 module.exports = {
     createLocation(req, res) {
-        const locationRequest = Object.assign({}, req.body);
+        const { session: {
+            user: {
+                auth: {
+                    id: userId
+                    }
+                }
+            }} = req;
+
+        const locationRequest = Object.assign({ userId }, req.body);
 
         if (locationRequest.markerId) {
 

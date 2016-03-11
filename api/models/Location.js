@@ -63,5 +63,29 @@ module.exports = {
                 }
             });
         });
+    },
+
+    updateLocation(id, userId, newLocation) {
+        return new Promise((resolve, reject) => {
+            this.update({ id, userId }, newLocation).exec((err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        })
+    },
+
+    deleteLocation(id, userId) {
+        return new Promise((resolve, reject) => {
+            this.destroy({ id, userId }).exec((err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        })
     }
 };

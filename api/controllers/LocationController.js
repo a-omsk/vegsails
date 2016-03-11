@@ -7,7 +7,7 @@
 
 module.exports = {
     createLocation(req, res) {
-        const { session: { user: { auth: { id: userId } } } } = req;
+        const { user: { auth: { id: userId } } } = req.session;
         const locationRequest = Object.assign({ userId }, req.body);
 
         if (locationRequest.markerId) {
@@ -35,9 +35,26 @@ module.exports = {
         const { city } = req.params;
 
         Marker.getMarkersByCity(city, 'locations', { lat, lng })
-            .then(markers => {
-                return res.json(MarkerService.toLocations(markers))
-            })
+            .then(markers => res.json(MarkerService.toLocations(markers)))
+            .catch(error => res.negotiate(error));
+    },
+
+    updateLocation(req, res) {
+        const { locationId } = req.params;
+        const { user: { auth: { id: userId } } } = req.session;
+        const newLocation = Object.assign({}, req.body);
+
+        Location.updateLocation(locationId, userId, newLocation)
+            .then(location => res.json(location))
+            .catch(error => res.negotiate(error));
+    },
+
+    deleteLocation(req, res) {
+        const { locationId } = req.params;
+        const { user: { auth: { id: userId } } } = req.session;
+
+        Location.deleteLocation(locationId, userId)
+            .then(() => res.ok())
             .catch(error => res.negotiate(error));
     }
 };

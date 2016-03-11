@@ -39,7 +39,7 @@ module.exports = {
                 } else {
                     resolve(comments);
                 }
-            })
+            });
         });
     },
 

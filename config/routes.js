@@ -48,10 +48,12 @@ module.exports.routes = {
 
     /* Locations and Markers */
 
-    'POST /locations': 'LocationController.createLocation',
     'GET /locations/:city': 'LocationController.getLocationsByCity',
     'GET /locations/:city/:id': 'MarkerController.getFullMarker',
     'GET /markers/:city': 'MarkerController.getMarkersByCity',
+    'POST /locations': 'LocationController.createLocation',
+    'PUT /locations/:locationId': 'LocationController.updateLocation',
+    'DELETE /locations/:locationId': 'LocationController.deleteLocation',
 
     /* Comments */
 

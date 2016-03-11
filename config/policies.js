@@ -36,6 +36,8 @@ module.exports.policies = {
   ***************************************************************************/
     LocationController:{
         createLocation:['sessionAuth'],
+        updateLocation:['sessionAuth'],
+        deleteLocation: ['sessionAuth'],
         '*':true
     },
 

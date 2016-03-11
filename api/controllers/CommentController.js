@@ -17,7 +17,11 @@ module.exports = {
     },
 
     getComments(req, res) {
-        return res.send('comments here');
+        const { locationId } = req.query;
+
+        Comment.getByLocation(locationId)
+            .then(location => res.json(location))
+            .catch(error => res.negotiate(error));
     }
 };
 

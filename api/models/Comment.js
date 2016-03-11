@@ -30,6 +30,19 @@ module.exports = {
         }
     },
 
+    getByLocation(id) {
+        return new Promise((resolve, reject) => {
+
+            Location.findOne({ id }).populate('comments').exec((err, { comments }) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(comments);
+                }
+            })
+        });
+    },
+
     createNew(commentBody) {
         return new Promise((resolve, reject) => {
             this.create(commentBody).exec((err, comment) => {

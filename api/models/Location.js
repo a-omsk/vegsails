@@ -8,7 +8,8 @@
 module.exports = {
     attributes: {
         name: {
-            type: 'string'
+            type: 'string',
+            required: 'true'
         },
 
         description: {
@@ -37,17 +38,19 @@ module.exports = {
         },
 
         markerId: {
-            model: 'marker'
+            model: 'marker',
+            required: true
         },
 
         userId: {
-            model: 'user'
+            model: 'user',
+            required: true
         }
     },
 
     createNew(location) {
         return new Promise((resolve, reject) => {
-            Location.create(location).exec((err, location) => {
+            this.create(location).exec((err, location) => {
                 if (err) {
                     reject(err);
                 } else {

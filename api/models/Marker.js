@@ -31,7 +31,7 @@ module.exports = {
 
     getMarkersByCity (city, populate) {
         return new Promise((resolve, reject) => {
-            const markers = populate ? Marker.find({ city }).populate(populate) : Marker.find({city});
+            const markers = populate ? this.find({ city }).populate(populate) : this.find({city});
 
             markers.exec((err, markers) => {
                 if (err) {
@@ -46,7 +46,7 @@ module.exports = {
     createNew(lat, lng, city) {
         return new Promise((resolve, reject) => {
             if (lat && lng && city) {
-                Marker.create({lat, lng, city}).exec((err, marker) => {
+                this.create({lat, lng, city}).exec((err, marker) => {
                     if (err) {
                         reject(err);
                     } else {
@@ -62,7 +62,7 @@ module.exports = {
     getFullMarker(id) {
         return new Promise((resolve, reject) => {
             if (id) {
-                Marker.find({ id }).populate('locations').exec((err, marker) => {
+                this.find({ id }).populate('locations').exec((err, marker) => {
                     if (err) {
                         return reject(err);
                     }

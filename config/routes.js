@@ -36,9 +36,10 @@ module.exports.routes = {
     view: 'homepage'
   },
 
-  'post /locations': 'LocationController.createLocation',
-  'get /locations/:city': 'LocationController.getLocationsByCity',
-  'get /markers/:city': 'MarkerController.getMarkersByCity'
+    'POST /locations': 'LocationController.createLocation',
+    'GET /locations/:city': 'LocationController.getLocationsByCity',
+    'GET /markers/:city': 'MarkerController.getMarkersByCity',
+    'GET /markers/*/:id': 'MarkerController.getFullMarker'
 
 
   /***************************************************************************

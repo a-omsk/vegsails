@@ -7,7 +7,13 @@
 
 module.exports = {
     createComment(req, res) {
-        return res.send('comment saved');
+        const { user: { auth: { id: userId } } } = req.session;
+        const { locationId } = req.query;
+        const commentBody = Object.assign({ userId, locationId }, req.body);
+
+        Comment.createNew(commentBody)
+            .then(comment => res.json(comment))
+            .catch(error => res.negotiate(error));
     },
 
     getComments(req, res) {

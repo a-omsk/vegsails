@@ -28,6 +28,18 @@ module.exports = {
             type: 'string',
             required: true
         }
+    },
+
+    createNew(commentBody) {
+        return new Promise((resolve, reject) => {
+            this.create(commentBody).exec((err, comment) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(comment);
+                }
+            });
+        });
     }
 };
 

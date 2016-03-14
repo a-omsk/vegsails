@@ -31,7 +31,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "node app.js",
-    "lift": "sails lift"
+    "lift": "mongod --dbpath ~/projects/db --port 30000 & sails lift"
   },
   "main": "app.js",
   "repository": {

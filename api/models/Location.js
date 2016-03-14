@@ -87,5 +87,32 @@ module.exports = {
                 }
             });
         })
+    },
+
+    calculateRating(locationId) {
+        return new Promise((resolve, reject) => {
+            this.findOne({ id: locationId }).populate('comments').exec((err, { comments }) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    const totalRating = comments.reduce((sum, { rating }) => sum + rating, 0);
+                    const avgRating = Math.ceil((totalRating / comments.length) / 0.5) * 0.5;
+
+                    resolve(avgRating);
+                }
+            })
+        });
+    },
+
+    updateRating(locationId, rating) {
+        return new Promise((resolve, reject) => {
+            this.update({ id: locationId }, {rating}).exec((err, result) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            })
+        })
     }
 };

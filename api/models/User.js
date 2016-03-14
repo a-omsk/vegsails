@@ -9,27 +9,10 @@
 module.exports = {
 
   attributes: require('waterlock').models.user.attributes({
-
-      firstName: {
-          type: 'string',
-          required: true
-      },
-
-      lastName: {
-          type: 'string',
-          required: true
-      },
-
-      city: {
-          type: 'string',
-          required: true
-      },
-
       comments: {
           collection: 'comment',
           via: 'userId'
       }
-
   }),
 
     getFullName() {

@@ -5,6 +5,12 @@
  * @docs        :: http://sailsjs.org/documentation/concepts/models-and-orm/models
  */
 
+const updateRating = (id, callback) => {
+    Location.calculateRating(id).then((newRating) => {
+        return Location.updateRating(id, newRating)
+    }).then(() => callback()).catch(callback);
+};
+
 module.exports = {
 
     attributes: {
@@ -28,6 +34,14 @@ module.exports = {
             type: 'string',
             required: true
         }
+    },
+
+    afterCreate({ locationId }, callback) {
+        updateRating(locationId, callback);
+    },
+
+    afterDestroy({ locationId }, callback) {
+        updateRating(locationId, callback);
     },
 
     getByLocation(id) {

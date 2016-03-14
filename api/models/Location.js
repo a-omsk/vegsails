@@ -74,7 +74,7 @@ module.exports = {
                     resolve(result);
                 }
             });
-        })
+        });
     },
 
     deleteLocation(id, userId) {
@@ -104,15 +104,15 @@ module.exports = {
         });
     },
 
-    updateRating(locationId, rating) {
+    updateRating(id, rating) {
         return new Promise((resolve, reject) => {
-            this.update({ id: locationId }, {rating}).exec((err, result) => {
+            this.update({ id }, {rating}).exec((err, result) => {
                 if (err) {
                     reject(err);
                 } else {
                     resolve(result);
                 }
             })
-        })
+        });
     }
 };

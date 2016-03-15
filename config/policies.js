@@ -35,14 +35,14 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
     LocationController:{
-        createLocation:['sessionAuth'],
-        updateLocation:['sessionAuth'],
-        deleteLocation: ['sessionAuth'],
+        createLocation:['hasJsonWebToken'],
+        updateLocation:['hasJsonWebToken'],
+        deleteLocation: ['hasJsonWebToken'],
         '*':true
     },
 
     CommentController: {
-        createComment: ['sessionAuth'],
+        createComment: ['hasJsonWebToken'],
         '*': true
     }
 };

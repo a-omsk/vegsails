@@ -7,7 +7,7 @@
 
 module.exports = {
     createLocation(req, res) {
-        const { user: { auth: { id: userId } } } = req.session;
+        const { user: { id: userId } } = req.session;
         const locationRequest = Object.assign({ userId }, req.body);
 
         if (locationRequest.markerId) {
@@ -41,7 +41,7 @@ module.exports = {
 
     updateLocation(req, res) {
         const { locationId } = req.params;
-        const { user: { auth: { id: userId } } } = req.session;
+        const { user: { id: userId } } = req.session;
         const newLocation = Object.assign({}, req.body);
 
         Location.updateLocation(locationId, userId, newLocation)
@@ -51,7 +51,7 @@ module.exports = {
 
     deleteLocation(req, res) {
         const { locationId } = req.params;
-        const { user: { auth: { id: userId } } } = req.session;
+        const { user: { id: userId } } = req.session;
 
         Location.deleteLocation(locationId, userId)
             .then(() => res.ok())
